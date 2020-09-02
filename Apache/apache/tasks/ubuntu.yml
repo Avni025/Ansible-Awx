@@ -1,0 +1,14 @@
+# install apache on ubuntu server
+- name: installing apache package
+  shell: |
+     apt-get install apache2 -y
+     systemctl enable apache2
+     systemctl start apache2
+
+- name: inserting webserver file
+  copy:
+    src: ubuntu.html
+    dest: "{{ remote_dest_path }}"
+    owner: root
+    group: root
+    mode: '777'

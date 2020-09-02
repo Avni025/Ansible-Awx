@@ -1,0 +1,6 @@
+---
+- name: Install webserever apache on linux
+  gather_facts: yes
+  hosts: linux
+  roles:
+    - apache

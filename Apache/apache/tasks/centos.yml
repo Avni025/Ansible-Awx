@@ -1,0 +1,14 @@
+# install apache on centos server
+- name: installing apache package
+  shell: |
+     dnf install httpd -y
+     systemctl enable httpd
+     systemctl start httpd
+
+- name: inserting webserver file
+  copy:
+    src: centos.html
+    dest: "{{ remote_dest_path }}"
+    owner: root
+    group: root
+    mode: '777'
