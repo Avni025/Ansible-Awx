@@ -1,0 +1,6 @@
+---
+- hosts: linux
+  become: true
+  tasks:
+  roles:
+   - nginx-setup
