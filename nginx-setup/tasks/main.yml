@@ -1,0 +1,27 @@
+---
+# Variable setup.
+- name: Include OS-specific variables.
+  include_vars: "{{ ansible_os_family }}.yml"
+
+
+# Setup/install tasks.
+- include_tasks: setup-RedHat.yml
+  when: ansible_os_family == 'RedHat'
+
+
+# copy HTML page 
+- name: copy the html page
+  copy:
+    src: index.html
+    dest: "{{html_path}}"
+#  copy:
+#   src: /etc/ansible/roles/index.txt
+#   dest: "{{html_path}}"
+#   remote_src: yes
+#   owner: root
+   
+- name: Ensure nginx service is running as configured.
+  service:
+    name: nginx
+    state: "{{ nginx_service_state }}"
+    enabled: "{{ nginx_service_enabled }}"

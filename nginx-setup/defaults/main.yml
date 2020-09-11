@@ -1,0 +1,13 @@
+---
+
+# Used only for Redhat installation, enables source Nginx repo.
+nginx_yum_repo_enabled: true
+
+
+# The name of the nginx package to install.
+nginx_package_name: "nginx"
+
+nginx_service_state: started
+nginx_service_enabled: true
+
+nginx_conf_template: "nginx.conf.j2"

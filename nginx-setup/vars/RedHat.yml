@@ -1,0 +1,4 @@
+---
+nginx_conf_path: /etc/nginx/conf.d
+html_path: /usr/share/nginx/html/index.html
+root_group: root
