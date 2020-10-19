@@ -1,0 +1,10 @@
+#[windows]
+#172.31.55.21
+#ansible_user: Administrator
+#ansible_password: W-%;5)NpGS8@AYrEveDv7E3d?vrvk.Ij
+#ansible_port: 5986
+#ansible_connection: winrm
+#ansible_winrm_server_cert_validation: ignore
+
+[linux]
+172.31.37.21

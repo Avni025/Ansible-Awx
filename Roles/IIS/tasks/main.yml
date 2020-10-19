@@ -1,0 +1,9 @@
+---
+# tasks file for IIS
+- name: installing IIS
+  win_feature:
+       name: "web-server"
+       state: present
+       restart: no
+       include_sub_features: yes
+       include_management_tools: yes

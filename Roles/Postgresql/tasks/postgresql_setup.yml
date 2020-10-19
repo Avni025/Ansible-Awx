@@ -1,0 +1,9 @@
+---
+#tasks file for Postgresql
+
+- name: now installing posgresql server 
+  shell: |
+     dnf install postgresql-server -y
+     postgresql-setup --initdb --unit postgresql
+     systemctl enable postgresql
+     systemctl start postgresql

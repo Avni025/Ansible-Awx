@@ -1,0 +1,40 @@
+---
+# tasks file for Aws-EC2
+
+- name: Launching an EC2 instance in AWS
+  ec2:
+    key_name: automate
+    instance_type: t2.micro
+    region: "{{ aws_region }}"
+    access_key: "{{ aws_access_key }}"
+    secret_key: "{{ aws_secret_key }}"
+    image: "{{ ami_instance_image }}"
+    wait: yes
+    group: "{{ aws_security_group }}"
+    count: "{{ instance_count }}"
+  register: ec2
+
+- name: Add tag to Instance(s)
+  ec2_tag:
+    aws_access_key: "{{ aws_access_key }}"
+    aws_secret_key: "{{ aws_secret_key }}"
+    resource: "{{ item.id }}" 
+    region: "{{ aws_region }}"
+    state: "present"
+  with_items: "{{ ec2.instances }}"
+  args:
+    tags:
+      Name: Webserver
+
+- name: Wait for SSH to come up
+  wait_for:
+    host: "{{ item.public_ip }}"
+    port: 22 
+    state: started 
+  with_items: "{{ ec2.instances }}"
+
+- name: Add the newly created host so that we can further contact it
+  add_host:
+    name: "{{ item.public_ip }}"
+    groups: webservers
+  with_items: "{{ ec2.instances }}"

@@ -1,0 +1,6 @@
+---
+- name: Install server role requirements on linux
+  gather_facts: yes
+  hosts: windows
+  roles:
+    - { role: Roles/IIS, when: server_role == 'webserver' and server_type_name == 'iis' }

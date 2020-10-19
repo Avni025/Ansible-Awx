@@ -1,0 +1,5 @@
+- name: installing mysql server on linux
+  shell: |
+     yum -y install @mysql
+     systemctl start mysqld
+     systemctl enable --now mysqld

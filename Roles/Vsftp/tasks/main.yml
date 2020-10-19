@@ -1,0 +1,92 @@
+---
+# tasks file for Vsftp
+- name: installing vsftpd package
+  yum:
+    name: vsftpd
+    state: present
+
+- name: Start service vsftpd, if not started
+  service:
+    name: vsftpd
+    state: started 
+
+- name: Enable service vsftpd, and not touch the state
+  service:
+    name: vsftpd
+    enabled: yes
+
+- name: Getting the Vsftpd service status
+  command: systemctl status vsftpd
+  register: service_status
+
+- debug:
+    msg: '{{ service_status }}'
+
+- name: setting up firewalld on system
+  yum:
+    name: firewalld
+    state: present
+
+- name: Enable service firewalld, and not touch the state
+  service:
+    name: firewalld
+    enabled: yes
+
+- name: transfer script to remote server
+  copy:
+    src: script.sh
+    dest: /root
+
+- name: running script on remote server
+  shell: |
+     chmod 755 /root/script.sh
+     sh /root/script.sh
+
+- name: Adding line one to config file on remote server
+  lineinfile:
+    path: /etc/vsftpd/vsftpd.conf
+    line: userlist_file=/etc/vsftpd/user_list
+
+- name: Adding line two to config file on remote server
+  lineinfile:
+    path: /etc/vsftpd/vsftpd.conf
+    line: userlist_deny=NO
+
+- name: ensuring required lines exist in config file
+  lineinfile:
+    dest: /etc/vsftpd/vsftpd.conf
+    regexp: '{{ item.regexp }}'
+    line: '{{ item.line }}'
+  with_items:
+   - { regexp: 'anonymous_enable=YES', line: 'anonymous_enable=NO' }
+   - { regexp: 'local_enable', line: 'local_enable=YES' }
+   - { regexp: 'write_enable', line: 'write_enable=YES' }
+   - { regexp: 'local_umask', line: 'local_umask=022' }
+   - { regexp: 'dirmessage_enable', line: 'dirmessage_enable=YES' }
+   - { regexp: 'xferlog_enable', line: 'xferlog_enable=YES' }
+   - { regexp: 'connect_from_port_20', line: 'connect_from_port_20=YES' }
+   - { regexp: 'xferlog_std_format', line: 'xferlog_std_format=YES' }
+   - { regexp: 'listen', line: 'listen=NO' }
+   - { regexp: 'listen_ipv6', line: 'listen_ipv6=YES' }
+   - { regexp: 'pam_service_name', line: 'pam_service_name=vsftpd' }
+   - { regexp: 'userlist_enable', line: 'userlist_enable=YES' }
+
+- name: transfer script to remote server
+  copy:
+    src: useradd.sh
+    dest: /root
+
+- name: running the user script on remote server
+  shell: |
+     chmod: 755 /root/useradd.sh
+     sh /root/useradd.sh
+
+- name: installing few dependencies
+  shell: |
+     yum install policycoreutils-python-utils -y
+     yum install lftp -y
+
+- name: running the final command
+  shell: |
+     semanage boolean -m ftpd_full_access --on
+     systemctl restart vsftpd
