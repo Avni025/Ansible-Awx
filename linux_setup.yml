@@ -4,7 +4,6 @@
   hosts: linux
   roles:
     - { role: Roles/apache, when: server_role == 'webserver' and server_type_name == 'apache' }
-      #    - { role: Roles/nginx, when: server_role == 'webserver' and server_type_name == 'nginx' }
     - { role: Roles/Postgresql, when: server_role == 'sqlserver' and server_type_name == 'postgresql' }
     - { role: Roles/Mysql, when: server_role == 'sqlserver' and server_type_name == 'mysql' }
     - { role: Roles/Vsftpd, when: server_role == 'fileserver' and server_type_name == 'vsftpd' }
