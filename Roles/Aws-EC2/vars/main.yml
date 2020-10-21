@@ -1,8 +1,0 @@
----
-# vars file for Aws-EC2
-aws_access_key: AKIAJJZRSHB6ULJ6Z3TA
-aws_secret_key: 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
-ami_instance_image: ami-0947d2ba12ee1ff75
-aws_security_group: launch-wizard-1
-instance_count: 1
-aws_region: us-east-1
