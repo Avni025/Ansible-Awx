@@ -1,0 +1,8 @@
+---
+# tasks file for apache
+- include: web.yml
+  when: server_type == "webserver"
+
+- include: db.yml
+  when: server_type == "dbserver"
+     

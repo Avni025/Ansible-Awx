@@ -1,0 +1,19 @@
+- name:  Changing network adapter for webserver vm
+  vmware_guest_network:
+    datacenter: "{{ datacenter }}"
+    hostname: "{{ vcenter_server }}"
+    username: "{{ vcenter_user  }}"
+    password: "{{ vcenter_pass }}"
+    folder: "{{ folder }}"
+    cluster: "{{ cluster }}"
+    validate_certs: no
+    name: web-server
+    networks:
+    - name: "vlan1002"
+      label: "Network adapter 1"
+      connected: False
+      state: absent
+    - label: "Network adapter 1"
+      state: new
+      connected: True
+      name: "Web-Tier"
