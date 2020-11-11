@@ -1,6 +1,11 @@
 ---
 - name: configuring server network with ansible
   hosts: localhost
+  vars:
+   vmware:
+    host: '{{ lookup("env", "VMWARE_HOST") }}'
+    username: '{{ lookup("env", "VMWARE_USER") }}'
+    password: '{{ lookup("env", "VMWARE_PASSWORD") }}'
   gather_facts: no
   roles:
     - nsx-t

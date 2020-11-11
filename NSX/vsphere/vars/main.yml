@@ -2,8 +2,5 @@
 # vars file for vsphere
 
 datacenter: IAC-PDC
-vcenter_server: 10.1.22.2
-vcenter_user: Dryicelabs\avni.mittal
-vcenter_pass: User@a.m098!
 folder: /IAC-PDC/vm/ansibleVM
 cluster: Compute-Cluster
