@@ -2,5 +2,6 @@
 # vars file for nsx-t
 
 datacenter: IAC-PDC
+vcenter_server: 10.1.22.2
 folder: /IAC-PDC/vm/ansibleVM
 cluster: Compute-Cluster

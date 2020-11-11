@@ -1,7 +1,7 @@
 - name:  Changing network adapter for dbserver vm
   vmware_guest_network:
     datacenter: "{{ datacenter }}"
-#    hostname: "{{ vcenter_server }}"
+    hostname: "{{ vcenter_server }}"
 #    username: "{{ vcenter_user  }}"
 #    password: "{{ vcenter_pass }}"
     folder: "{{ folder }}"
