@@ -2,7 +2,7 @@
 - name: configuring VM tagging in nsx-t with ansible
   hosts: localhost
   vars:
-    vmware:
+    NSX-T Manager:
       username: '{{ lookup("env", "NSX-T Manager_USERNAME") }}'
       password: '{{ lookup("env", "NSX-T Manager_PASSWORD") }}'
 
