@@ -4,6 +4,9 @@
 #    hostname: "{{ vcenter_server }}"
 #    username: "{{ vcenter_user  }}"
 #    password: "{{ vcenter_pass }}"
+    VMWARE_HOST: ESXI_HOSTNAME
+    VMWARE_USER: ESXI_USERNAME
+    VMWARE_PASSWORD: ESXI_PASSWORD
     folder: "{{ folder }}"
     cluster: "{{ cluster }}"
     validate_certs: no
