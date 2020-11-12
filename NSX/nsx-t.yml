@@ -1,10 +1,10 @@
 ---
 - name: configuring VM tagging in nsx-t with ansible
   hosts: localhost
-  vars:
-    nsxt:
-      username: "{{ nsxt_admin_username }}"
-      password: "{{ nsxt_admin_password }}"
+#  vars:
+#    nsxt:
+#      username: "{{ nsxt_admin_username }}"
+#      password: "{{ nsxt_admin_password }}"
 #      username: '{{ lookup("env", "NSX-T_USER") }}'
 #      password: '{{ lookup("env", "NSX-T_PASSWORD") }}'
 
@@ -13,6 +13,8 @@
     - name: Get the tag info about VM in nsx-t network
       uri:
         url: https://10.1.22.3/api/v1/fabric/virtual-machines?display_name=web-server&included_fields=tags
+        username: "{{ nsxt_admin_username }}"
+        password: "{{ nsxt_admin_password }}"
         method: GET
         force_basic_auth: yes
         validate_certs: no
@@ -24,6 +26,8 @@
     - name: Attach a new tag to the VM in nsx-t network
       uri:
         url: https://10.1.22.3/api/v1/fabric/virtual-machines?action=update_tags
+        username: "{{ nsxt_admin_username }}"
+        password: "{{ nsxt_admin_password }}"
         method: POST
         body: "{{ lookup('file','myfile.json') }}"
         force_basic_auth: yes
