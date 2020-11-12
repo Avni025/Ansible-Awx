@@ -5,7 +5,10 @@
    vmware:
     host: '{{ lookup("env", "VMWARE_HOST") }}'
     username: '{{ lookup("env", "VMWARE_USER") }}'
-    password: '{{ lookup("env", "VMWARE_PASSWORD") }}'
+    password: '{{ lookup("env", "VMWARE_PASSWORD") }}'    
+    VMWARE_HOST: ESXI_HOSTNAME
+    VMWARE_USER: ESXI_USERNAME
+    VMWARE_PASSWORD: ESXI_PASSWORD
   gather_facts: no
   roles:
     - nsx-t
