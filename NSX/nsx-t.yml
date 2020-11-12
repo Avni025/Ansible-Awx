@@ -3,8 +3,10 @@
   hosts: localhost
   vars:
     nsxt:
-      username: '{{ lookup("env", "NSX-T_USER") }}'
-      password: '{{ lookup("env", "NSX-T_PASSWORD") }}'
+      username: "{{ nsxt_admin_username }}"
+      password: "{{ nsxt_admin_password }}"
+#      username: '{{ lookup("env", "NSX-T_USER") }}'
+#      password: '{{ lookup("env", "NSX-T_PASSWORD") }}'
 
   gather_facts: no
   tasks:
